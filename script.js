@@ -19,4 +19,26 @@ function test() {
     });
 }
 
-test();
+// test();
+
+// Get Jokes from Joke API
+async function getJokes() {
+    const apiUrl = 'https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist';
+    let joke = '';
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        console.log(data);
+        if(data.joke) {
+            joke = data.joke;
+        }
+        else {
+            joke = data.setup + ', ' + data.delivery;
+        }
+        console.log(joke);
+    } catch (error) {
+        console.log('error fetching jokes', error);
+    }
+}
+
+getJokes();
